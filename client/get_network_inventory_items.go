@@ -75,7 +75,7 @@ func (c *Client) GetParentId() (string, error) {
 
 func (c *Client) GetNetworkInventoryItems(i int, parentId string) (*NetworkInventoryItems, error) {
 	errMsg := "get network inventory items failed: : %w"
-	requestBody := fmt.Sprintf(`{ "params": {"parentId": "%s", "page": %d, "perPage": 100, "filters": {"type": { "computers": true},"depth": {"allItemsRecursively": true}},"options": {"companies": { "returnAllProducts": true},"endpoints": { "returnProductOutdated": true, "includeScanLogs": true }}}, "jsonrpc": "2.0", "method": "getNetworkInventoryItems","id": "301f7b05-ec02-481b-9ed6-c07b97de2b7b"}`, parentId, i)
+	requestBody := fmt.Sprintf(`{ "params": {"parentId": "%s", "page": %d, "perPage": 100, "filters": {"type": { "computers": true},"security": { "managedWithBest": true },"depth": {"allItemsRecursively": true}},"options": {"companies": { "returnAllProducts": true},"endpoints": { "returnProductOutdated": true, "includeScanLogs": true }}}, "jsonrpc": "2.0", "method": "getNetworkInventoryItems","id": "301f7b05-ec02-481b-9ed6-c07b97de2b7b"}`, parentId, i)
 
 	res, err := c.R().SetBody(requestBody).
 		SetResult(&NetworkInventoryItems{}).
